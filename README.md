@@ -1,8 +1,8 @@
 # child-process
 
 [![CircleCI](https://circleci.com/gh/nodelet/child-process/tree/master.svg?style=svg)](https://circleci.com/gh/nodelet/child-process/tree/master)
-[![NPM Downloads](https://img.shields.io/npm/dw/child-process.svg)](https://www.npmjs.com/package/child-process)
-[![node](https://img.shields.io/node/v/child-process.svg)](https://www.npmjs.com/package/child-process)
+[![NPM Downloads](https://img.shields.io/npm/dm/@nodelet/child-process)](https://www.npmjs.com/package/@nodelet/child-process)
+[![node](https://img.shields.io/node/v/@nodelet/child-process.svg)](https://www.npmjs.com/package/@nodelet/child-process)
 [![License MIT](https://img.shields.io/github/license/nodelet/child-process.svg)](https://github.com/nodelet/child-process/blob/master/LICENSE)
 
 child-process with rxjs observable interface
@@ -43,7 +43,7 @@ $ yarn add @nodelet/child-process
     ({message}) => process.stdout.write(message),
     e => console.error(e)
   )
-  //-------------------------------------------------
+
   //exec
   const { exec } = require('@nodelet/child-process');
 
