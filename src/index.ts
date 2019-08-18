@@ -23,14 +23,11 @@ export function exec(command: string):Observable<{stdout:string, stderr:string}>
     });
 };
 
-export enum StdioType {
-    stdout = 'stdout',
-    stderr = 'stderr'
-}
+
 
 export interface ChildProcessMessage {
-    message:string|Buffer;
-    type: StdioType;
+    stdout?:string|Buffer;
+    stderr?: string|Buffer;
 }
 
 export interface SpawnOptions extends SpawnOptionsWithoutStdio {
@@ -44,12 +41,12 @@ export function spawn(command: string, argv?: string[], options?: SpawnOptions):
                 subscriber.error(err);
             });
 
-            childProcess.stdout.on('data', (chunk) => {
-                subscriber.next({message: chunk, type: StdioType.stdout });
+            childProcess.stdout.on('data', (stdout) => {
+                subscriber.next({stdout});
             });
 
-            childProcess.stderr.on('data', (chunk) => {
-                subscriber.next({message: chunk, type: StdioType.stderr });
+            childProcess.stderr.on('data', (stderr) => {
+                subscriber.next({stderr});
             });
 
             childProcess.on('exit', (code, signal) => {

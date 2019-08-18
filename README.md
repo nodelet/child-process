@@ -39,10 +39,16 @@ $ yarn add @nodelet/child-process
 
   const childProcess$ = spawn('node', ['-v']);
 
-  let processSubscription = childProcess$.subscribe(
-    ({message}) => process.stdout.write(message),
+    let processSubscription = childProcess$.subscribe(
+    ({stdout, stderr}) => {
+        if(stdout){
+            process.stdout.write(stdout)
+        } else if(stderr) {
+            process.stderr.write(stderr)
+        }
+    },
     e => console.error(e)
-  )
+  );
 
   //exec
   const { exec } = require('@nodelet/child-process');
@@ -50,9 +56,15 @@ $ yarn add @nodelet/child-process
   const childProcess$ = exec('node -v');
 
   let processSubscription = childProcess$.subscribe(
-    ({stdout, stderr}) => process.stdout.write(stdout),
+    ({stdout, stderr}) => {
+        if(stdout){
+            process.stdout.write(stdout)
+        } else if(stderr) {
+            process.stderr.write(stderr)
+        }
+      },
     e => console.error(e)
-  )
+  );
 
 ```
 
